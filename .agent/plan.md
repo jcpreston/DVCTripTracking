@@ -1,38 +1,32 @@
 # Project Plan
 
-DVC Trip Tracking app for Disney Vacation Club members to track trips and booking windows. Features include trip management, booking window calculation (11-month, 7-month, 60-day ADR), and a trip history dashboard. Built with Kotlin, Jetpack Compose (M3), Room, and Navigation. Requires vibrant M3 design, adaptive icon, and edge-to-edge display.
+Update the DVC Trip Tracking app to move the 11-month and 7-month booking window displays from the Trip Details screen to the Homepage (Dashboard). The dates on the homepage should be calculated relative to the current date (today). Trip Details should still show the 60-day ADR window.
 
 ## Project Brief
 
-# Project Brief: DVC Trip Tracking
+# Project Brief: DVC Trip Tracking (Updated)
 
-A streamlined Android application designed for Disney Vacation Club (DVC) members to manage their upcoming vacations and track critical booking milestones. The app ensures members never miss their priority booking windows for resorts or dining.
+A streamlined Android application designed for Disney Vacation Club (DVC) members to manage their upcoming vacations and track critical booking milestones. 
 
-## Features
+## Updated Features
 
 - **Trip Management**: Log new DVC trips by selecting the resort, check-in date, and stay duration.
-- **Booking Window Calculator**: Automatically generates key dates for every trip, including the 11-month Home Resort window and the 7-month "Other Resort" window.
-- **Dining & Extras Countdown**: Tracks the 60-day mark for Advance Dining Reservations (ADR) and Enchanting Extras, including the "+10" day benefit for resort guests.
+- **Booking Window Reference**: On the **Homepage (Dashboard)**, display the current 11-month and 7-month booking window dates (calculated from the current date) for quick reference.
+- **Dining & Extras Countdown**: On the **Trip Details** screen, continue to track the 60-day mark for Advance Dining Reservations (ADR) and Enchanting Extras.
 - **Trip History Dashboard**: A chronological list of all previous and future trips, allowing users to review their vacation history at a glance.
 
-## High-Level Technical Stack
+## Technical Requirements (Unchanged)
 
 - **Language**: Kotlin
 - **UI Framework**: Jetpack Compose (Material 3)
 - **Asynchronous Programming**: Kotlin Coroutines & Flow
 - **Dependency Injection/Navigation**: Navigation Compose
 - **Persistence**: Room Database (for storing trip history and details)
-- **Code Generation**: KSP (Kotlin Symbol Processing)
 - **Image Loading**: Coil (for resort imagery)
-
-## Visual & Component requirements
-The app must strictly follow Material Design 3 (M3) and Android UX guidelines and use a vibrant, energetic color scheme, with strong Android and Material design aesthetic.
-- Use the Material color system. Create a color scheme for light and dark. Use the Material Color Utilities to provide a color scheme and appropriate themes.
-- Create an adaptive app icon matching the app's core function.
-- Implement Full Edge-to-Edge Display.
+- **Visuals**: Vibrant Material 3 theme, Adaptive Icon, Edge-to-Edge display.
 
 ## Implementation Steps
-**Total Duration:** 4m 33s
+**Total Duration:** 5m 33s
 
 ### Task_1_Infrastructure_Theme_And_Dashboard: Setup the foundational infrastructure including Room database, Navigation, and the Material 3 theme. Create the Trip History Dashboard as the entry point.
 - **Status:** COMPLETED
@@ -46,48 +40,32 @@ The app must strictly follow Material Design 3 (M3) and Android UX guidelines an
 - **Status:** COMPLETED
 - **Updates:** I have successfully completed **Task 3: Details Screen and Assets**, finalizing the core features and visual identity of the DVC Trip Tracking app.
 
-### Key Actions Taken:
-1.  **Resort Imagery & Coil Integration**:
-    *   Integrated **Coil** to display high-quality resort imagery.
-    *   Created `ResortImages.kt` to map specific DVC resorts to relevant travel imagery (using high-quality Unsplash URLs as placeholders).
-    *   Updated the **Dashboard** to show resort thumbnails in the trip cards.
-    *   Enhanced the **Trip Details** screen with a large hero image for each resort.
-2.  **Trip Details Refinement**:
-    *   Polished the layout using Material 3 Expressive components.
-    *   Ensured all milestones (11-month, 7-month, and 60-day ADR) feature **active countdowns** (e.g., "In 45 days", "TODAY!", or "Passed").
-    *   Used vibrant, theme-consistent colors for milestone cards to highlight different booking windows.
-3.  **Adaptive App Icon**:
-    *   Generated a professional **adaptive icon**.
-    *   **Foreground**: A stylized calendar and golden location pin, representing trip planning and Disney destinations.
-    *   **Background**: A vibrant blue (`#1273DE`) reflecting a travel and vacation aesthetic.
-    *   Verified the icon layers (`ic_launcher_background.xml` and `ic_launcher_foreground.xml`) and adaptive configurations.
-4.  **Final Validation**:
-    *   Ensured **Edge-to-Edge** support is maintained across all screens.
-    *   Verified that the project builds successfully and the navigation flow (Dashboard -> Add Trip -> Details -> Dashboard) is seamless.
+### Task_4_Relocate_Booking_Windows_to_Dashboard: Update the Dashboard to display the current 11-month and 7-month booking windows relative to today. Refine the Trip Details screen to only show the 60-day ADR window.
+- **Status:** COMPLETED
+- **Updates:** I have successfully updated the **DVC Trip Tracking** app to relocate the booking windows and refine the trip details as requested.
 
-### Outcomes:
-*   The app is now visually rich and provides clear, actionable information for DVC members.
-*   Resort-specific images add a premium feel to the vacation tracking experience.
-*   The adaptive icon ensures the app looks native and professional on the Android home screen.
+### Task_5_Run_And_Verify: Perform a final build and comprehensive verification of the application stability and requirements alignment.
+- **Status:** COMPLETED
+- **Updates:** I have successfully verified the recent changes to the **DVC Trip Tracking** app.
 
-### Summary of Completed Project:
-The **DVC Trip Tracking** app is now fully functional with:
-*   **Infrastructure**: Room database for persistence, Navigation Compose, and a vibrant Material 3 theme.
-*   **Trip Management**: Ability to add, view, and delete trips with resort selection and date pickers.
-*   **Booking Logic**: Automatic calculation of 11-month, 7-month, and 60-day milestones.
-*   **Dashboard**: A chronological history of vacations with resort imagery and countdowns.
+### Verification Results:
+1.  **Dashboard Screen (`DashboardScreen.kt`)**:
+    *   Confirmed the addition of the **"Today's Booking Windows"** card.
+    *   The card correctly calculates and displays the **11-month (Home Resort)** and **7-month (Other Resort)** dates relative to the current date (`LocalDate.now()`).
+    *   The card uses the `secondaryContainer` color for a vibrant, Material 3-compliant look.
+2.  **Trip Details Screen (`TripDetailsScreen.kt`)**:
+    *   Confirmed that the **11-month** and **7-month** milestones have been **removed**.
+    *   The screen now only shows the **60-day ADR & Extras** milestone, keeping it focused on trip-specific needs.
+    *   The `Restaurant` icon is used for better visual context.
+3.  **Build & Tests**:
+    *   The project builds successfully (`app:assembleDebug`).
+    *   All unit tests passed (`app:testDebugUnitTest`), including the logic for booking window calculations.
+
+The app is stable, functionally complete according to the updated requirements, and follows Material 3 design principles with edge-to-edge support.
 - **Acceptance Criteria:**
-  - Trip Details screen displays calculated booking dates and active countdowns
-  - Coil is integrated to display resort-specific images
-  - Adaptive app icon is created and matches the app's core function
-- **Duration:** 4m 33s
-
-### Task_4_Run_And_Verify: Perform a final build and comprehensive verification of the application.
-- **Status:** IN_PROGRESS
-- **Acceptance Criteria:**
-  - The project builds successfully
-  - Application is stable with no crashes during typical usage flows
-  - UI follows Material 3 guidelines and the vibrant aesthetic requested
-  - All existing tests pass and the app is fully functional
-- **StartTime:** 2026-04-03 08:39:23 EDT
+  - Project builds successfully
+  - App does not crash during navigation or trip addition
+  - Existing tests pass
+  - All UI requirements (Dashboard reference dates, Trip Details ADR) are met
+- **Duration:** 5m 33s
 

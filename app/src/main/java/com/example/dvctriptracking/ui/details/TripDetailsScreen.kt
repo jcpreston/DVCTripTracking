@@ -7,7 +7,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Delete
-import androidx.compose.material.icons.rounded.Event
+import androidx.compose.material.icons.rounded.Restaurant
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -142,33 +142,17 @@ fun TripDetailsContent(
 
         HorizontalDivider()
 
-        // Booking Windows
+        // Dining & Extras Milestone
         Text(
-            text = "Booking Windows",
+            text = "Trip Milestones",
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.SemiBold
         )
 
         MilestoneCard(
-            title = "11-Month Home Resort",
-            date = trip.bookingWindow11Month,
-            icon = Icons.Rounded.Event,
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-        )
-
-        MilestoneCard(
-            title = "7-Month Other Resort",
-            date = trip.bookingWindow7Month,
-            icon = Icons.Rounded.Event,
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-        )
-
-        MilestoneCard(
             title = "60-Day ADR & Extras",
             date = trip.bookingWindow60Day,
-            icon = Icons.Rounded.Event,
+            icon = Icons.Rounded.Restaurant,
             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
