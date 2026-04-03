@@ -27,6 +27,9 @@ import com.example.dvctriptracking.ui.details.TripDetailsViewModel
 import com.example.dvctriptracking.ui.details.TripDetailsViewModelFactory
 import com.example.dvctriptracking.ui.navigation.Screen
 import com.example.dvctriptracking.ui.theme.DVCTripTrackingTheme
+import com.example.dvctriptracking.ui.pasttrips.PastTripsScreen
+import com.example.dvctriptracking.ui.pasttrips.PastTripsViewModel
+import com.example.dvctriptracking.ui.pasttrips.PastTripsViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,6 +73,9 @@ fun AppNavigation(
                 },
                 onTripClick = { tripId ->
                     navController.navigate(Screen.TripDetails.createRoute(tripId))
+                },
+                onPastTripsClick = {
+                    navController.navigate(Screen.PastTrips.route)
                 }
             )
         }
@@ -81,6 +87,19 @@ fun AppNavigation(
             AddTripScreen(
                 viewModel = viewModel,
                 onNavigateBack = { navController.popBackStack() }
+            )
+        }
+        
+        composable(Screen.PastTrips.route) {
+            val viewModel: PastTripsViewModel = viewModel(
+                factory = PastTripsViewModelFactory(repository)
+            )
+            PastTripsScreen(
+                viewModel = viewModel,
+                onNavigateBack = { navController.popBackStack() },
+                onTripClick = { tripId ->
+                    navController.navigate(Screen.TripDetails.createRoute(tripId))
+                }
             )
         }
         

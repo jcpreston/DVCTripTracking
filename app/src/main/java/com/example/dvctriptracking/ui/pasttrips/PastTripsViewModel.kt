@@ -1,4 +1,4 @@
-package com.example.dvctriptracking.ui.dashboard
+package com.example.dvctriptracking.ui.pasttrips
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -11,32 +11,32 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import java.time.LocalDate
 
-class DashboardViewModel(private val repository: TripRepository) : ViewModel() {
+class PastTripsViewModel(private val repository: TripRepository) : ViewModel() {
 
-    val uiState: StateFlow<DashboardUiState> = repository.allTrips
+    val uiState: StateFlow<PastTripsUiState> = repository.allTrips
         .map { trips ->
             val today = LocalDate.now()
-            val upcomingTrips = trips.filter { it.checkInDate >= today }
-                .sortedBy { it.checkInDate }
-            DashboardUiState(trips = upcomingTrips)
+            val pastTrips = trips.filter { it.checkInDate < today }
+                .sortedByDescending { it.checkInDate }
+            PastTripsUiState(trips = pastTrips)
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = DashboardUiState(isLoading = true)
+            initialValue = PastTripsUiState(isLoading = true)
         )
 }
 
-data class DashboardUiState(
+data class PastTripsUiState(
     val trips: List<Trip> = emptyList(),
     val isLoading: Boolean = false
 )
 
-class DashboardViewModelFactory(private val repository: TripRepository) : ViewModelProvider.Factory {
+class PastTripsViewModelFactory(private val repository: TripRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(DashboardViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(PastTripsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return DashboardViewModel(repository) as T
+            return PastTripsViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

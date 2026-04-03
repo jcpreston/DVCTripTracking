@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.rounded.CalendarMonth
+import androidx.compose.material.icons.rounded.History
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -31,7 +32,8 @@ import java.time.format.DateTimeFormatter
 fun DashboardScreen(
     viewModel: DashboardViewModel,
     onAddTripClick: () -> Unit,
-    onTripClick: (Long) -> Unit
+    onTripClick: (Long) -> Unit,
+    onPastTripsClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -39,6 +41,11 @@ fun DashboardScreen(
         topBar = {
             TopAppBar(
                 title = { Text("DVC Trip Tracking") },
+                actions = {
+                    IconButton(onClick = onPastTripsClick) {
+                        Icon(Icons.Rounded.History, contentDescription = "Past Trips")
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -170,12 +177,12 @@ fun EmptyDashboard(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "No trips planned yet",
+            text = "No upcoming trips",
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Text(
-            text = "Tap + to add your first Disney vacation!",
+            text = "Tap + to add your next Disney vacation!",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
