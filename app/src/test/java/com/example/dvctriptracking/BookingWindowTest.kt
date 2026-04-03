@@ -4,6 +4,7 @@ import com.example.dvctriptracking.data.Trip
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 class BookingWindowTest {
 
@@ -36,5 +37,13 @@ class BookingWindowTest {
         )
 
         assertEquals(LocalDate.of(2025, 12, 30), trip.checkOutDate)
+    }
+
+    @Test
+    fun testDurationCalculation() {
+        val start = LocalDate.of(2025, 10, 1)
+        val end = LocalDate.of(2025, 10, 10)
+        val nights = ChronoUnit.DAYS.between(start, end).toInt()
+        assertEquals(9, nights)
     }
 }

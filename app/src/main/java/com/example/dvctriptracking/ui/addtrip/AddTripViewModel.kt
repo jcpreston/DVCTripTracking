@@ -10,33 +10,40 @@ import com.example.dvctriptracking.data.Trip
 import com.example.dvctriptracking.data.TripRepository
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 class AddTripViewModel(private val repository: TripRepository) : ViewModel() {
 
     var resortName by mutableStateOf("")
         private set
 
-    var checkInDate by mutableStateOf<LocalDate>(LocalDate.now())
+    var checkInDate by mutableStateOf<LocalDate?>(null)
         private set
 
-    var durationDays by mutableStateOf("7")
+    var checkOutDate by mutableStateOf<LocalDate?>(null)
         private set
 
     var notes by mutableStateOf("")
         private set
 
+    val durationDays: Int
+        get() {
+            val start = checkInDate
+            val end = checkOutDate
+            return if (start != null && end != null) {
+                ChronoUnit.DAYS.between(start, end).toInt()
+            } else {
+                0
+            }
+        }
+
     fun updateResortName(name: String) {
         resortName = name
     }
 
-    fun updateCheckInDate(date: LocalDate) {
-        checkInDate = date
-    }
-
-    fun updateDuration(duration: String) {
-        if (duration.all { it.isDigit() }) {
-            durationDays = duration
-        }
+    fun updateDateRange(start: LocalDate?, end: LocalDate?) {
+        checkInDate = start
+        checkOutDate = end
     }
 
     fun updateNotes(newNotes: String) {
@@ -44,10 +51,13 @@ class AddTripViewModel(private val repository: TripRepository) : ViewModel() {
     }
 
     fun saveTrip(onSuccess: () -> Unit) {
-        val duration = durationDays.toIntOrNull() ?: 7
+        val start = checkInDate ?: return
+        val duration = durationDays
+        if (duration <= 0) return
+
         val trip = Trip(
             resortName = resortName,
-            checkInDate = checkInDate,
+            checkInDate = start,
             durationDays = duration,
             notes = notes
         )
