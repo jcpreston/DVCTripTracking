@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Calendar Body -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M26,35 c0,-2.2 1.8,-4 4,-4 h48 c2.2,0 4,1.8 4,4 v40 c0,2.2 -1.8,4 -4,4 h-48 c-2.2,0 -4,-1.8 -4,-4 z" />
+    <!-- Calendar Header -->
+    <path
+        android:fillColor="#FF5252"
+        android:pathData="M26,35 c0,-2.2 1.8,-4 4,-4 h48 c2.2,0 4,1.8 4,4 v8 h-56 z" />
+    <!-- Calendar Rings -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M38,28 h4 v6 h-4 z M66,28 h4 v6 h-4 z" />
+    <!-- Location Pin (Disney style) -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M54,48 c-4.4,0 -8,3.6 -8,8 c0,4.4 8,14 8,14 s8,-9.6 8,-14 c0,-4.4 -3.6,-8 -8,-8 z M54,59 c-1.7,0 -3,-1.3 -3,-3 s1.3,-3 3,-3 s3,1.3 3,3 s-1.3,3 -3,3 z" />
+</vector>
